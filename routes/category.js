@@ -8,15 +8,15 @@ const {
 
 } = require("../controllers/category");
 
-const { isSignedIn } = require("../controllers/auth");
+//const { isSignedIn } = require("../controllers/auth");
 
-router.get("/category/view", isSignedIn, getAllCategory);
+router.get("/category/view",  getAllCategory);
 
-router.post("/category/create", isSignedIn, createCategory);
+router.post("/category/create",  createCategory);
 
-router.put("/category/update", isSignedIn, updateCategory);
+router.put("/category/update",  updateCategory);
 
-router.delete("/category/delete", isSignedIn, removeCategory);
+router.delete("/category/delete",  removeCategory);
 
 // router.param("settingId", getSettingById);
 

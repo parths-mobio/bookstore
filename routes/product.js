@@ -10,13 +10,13 @@ const {
 
 const { isSignedIn } = require("../controllers/auth");
 
-router.get("/product/view", isSignedIn, getAllProduct);
+router.get("/product/view", getAllProduct);
 
-router.post("/product/create", isSignedIn, createProduct);
+router.post("/product/create",  createProduct);
 
-router.put("/product/update", isSignedIn, updateProduct);
+router.put("/product/update",  updateProduct);
 
-router.delete("/product/delete", isSignedIn, removeProduct);
+router.delete("/product/delete",  removeProduct);
 
 // router.param("settingId", getSettingById);
 

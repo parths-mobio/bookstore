@@ -1,0 +1,15 @@
+version: '3.8'
+services: 
+  web:
+    image: bookstore
+    build: .
+    command: "npm start"
+    ports:
+      - "8000:8000"
+    depends_on: 
+      - "mongo"
+  mongo:
+    container_name: "mongo"
+    image: "mongo"
+    ports:
+      - "27017:27017"

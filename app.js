@@ -47,3 +47,5 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
   console.log(`App is listining at ${port}`);
 });
+
+module.exports=app;

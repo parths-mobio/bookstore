@@ -15,7 +15,7 @@ router.post(
     check("email", {
       Status: "Error",
       Statuscode: 400,
-      message: "email is required",
+      message: "Check Email",
     }).isEmail(),
     check("mobile", {
       Status: "Error",

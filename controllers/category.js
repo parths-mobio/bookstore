@@ -21,10 +21,10 @@ exports.createCategory = (req, res) => {
       return res.status(400).json({
         status: "Error",
         statusCode: 400,
-        error: "NOT able to save category in DB",
+        message: "NOT able to save category in DB",
       });
     }
-    res.json({
+    res.status(200).json({
       status: "Success",
       statusCode: 200,
       message: "Successfully Created",
@@ -34,7 +34,7 @@ exports.createCategory = (req, res) => {
 };
 
 exports.getCategory = (req, res) => {
-  return res.json({
+  return res.status(200).json({
     status: "Success",
     statusCode: 200,
     message: "Successfully Viewed",
@@ -51,7 +51,7 @@ exports.getAllCategory = (req, res) => {
         error: "NO categories found",
       });
     }
-    res.json({
+    res.status(200).json({
       status: "Success",
       statusCode: 200,
       message: "Successfully View",
@@ -71,12 +71,12 @@ exports.updateCategory = (req, res) => {
         return res.status(400).json({
           status: "Error",
           statusCode: 400,
-          error: "You are not authorized to update this Category",
+          message: "Failed to update this Category",
         });
       }
       cat.salt = undefined;
       cat.encry_password = undefined;
-      res.json({
+      res.status(200).json({
         status: "Success",
         statusCode: 200,
         message: "Successfully Update",
@@ -86,16 +86,18 @@ exports.updateCategory = (req, res) => {
   );
 };
 
-exports.removeCategory = (req, res) => {
-  const category = req.category;
+exports.removeCategory = async (req, res) => {
+  const category = req.query.id;
 
-  category.remove((err, category) => {
+  await Category.findById(category).remove((err, category) => {
     if (err) {
       return res.status(400).json({
-        error: "Failed to delete this category",
+        status: "Error",
+        statusCode: 400,
+        message: "failed to delete this category",
       });
     }
-    res.json({
+    res.status(200).json({
       status: "Success",
       statusCode: 200,
       message: "Successfull deleted",

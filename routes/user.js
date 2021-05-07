@@ -12,10 +12,10 @@ const { isSignedIn } = require("../controllers/auth");
 
 router.param("userId", getUserById);
 
-router.get("/user/view/:userId", isSignedIn, getUser);
-router.get("/user/viewall", isSignedIn, getAllUsers);
-router.put("/user/:userId", isSignedIn, updateUser);
+router.get("/user/view/:userId", getUser);
+router.get("/user/viewall", getAllUsers);
+router.put("/user/update", updateUser);
 
-router.delete("/user/:userId", isSignedIn, deleteUser);
+router.delete("/user/delete", deleteUser);
 
 module.exports = router;

@@ -6,7 +6,7 @@ exports.signup = async (req, res) => {
 const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    return res.status(422).json({
+    return res.status(400).json({
       error: errors.array()[0].msg
     });
   }
@@ -17,7 +17,7 @@ const errors = validationResult(req);
       return res.status(400).json({
         Status: "Error",
         statusCode: 400,
-        err: "Not able to save User",
+        error: "Not able to save User",
       });
     }
     res.json({
@@ -27,6 +27,7 @@ const errors = validationResult(req);
         user: {
           name: user.name,
           email: user.email,
+          address:user.address,
           id: user._id         
         },
     });
@@ -67,7 +68,7 @@ exports.signin = async (req, res) => {
     res.cookie("token", token);
 
     const { _id, name, email, role } = user;
-    return res.json({
+    return res.status(200).json({
       status: "Success",
       statusCode: 200,
       token,

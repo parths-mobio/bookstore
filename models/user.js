@@ -30,12 +30,12 @@ var userSchema = new mongoose.Schema(
     mobile: {
       type: Number,
       trim: true,
-      required: true,
+    
       unique: true,
     },
     encry_password: {
       type: String,
-      required: true,
+      
     },
     salt: String,
     // role: {

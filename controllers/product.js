@@ -21,10 +21,10 @@ exports.createProduct = (req, res) => {
       return res.status(400).json({
         status: "Error",
         statusCode: 400,
-        error: "NOT able to save product in DB",
+        message: "NOT able to save product in DB",
       });
     }
-    res.json({
+    res.status(200).json({
       status: "Success",
       statusCode: 200,
       message: "Successfully Created",
@@ -34,7 +34,7 @@ exports.createProduct = (req, res) => {
 };
 
 exports.getProduct = (req, res) => {
-  return res.json({
+  return res.status(200).json({
     status: "Success",
     statusCode: 200,
     message: "Successfully Viewed",
@@ -53,7 +53,7 @@ exports.getAllProduct = (req, res) => {
         error: "NO Product found",
       });
     }
-    res.json({
+    res.status(200).json({
       status: "Success",
       statusCode: 200,
       message: "Successfully View",
@@ -73,10 +73,10 @@ exports.updateProduct = (req, res) => {
         return res.status(400).json({
           status: "Error",
           statusCode: 400,
-          error: "You are not authorized to update this Product",
+          message: "Failed to update this Product",
         });
       }
-       res.json({
+       res.status(200).json({
         status: "Success",
         statusCode: 200,
         message: "Successfully Update",
@@ -86,16 +86,16 @@ exports.updateProduct = (req, res) => {
   );
 };
 
-exports.removeProduct = (req, res) => {
-  const product = req.product;
+exports.removeProduct = async (req, res) => {
+  const product = req.query.id;
 
-  product.remove((err, product) => {
+  await Product.findById(product).remove((err, product) => {
     if (err) {
       return res.status(400).json({
-        error: "Failed to delete this product",
+        message: "Failed to delete this product",
       });
     }
-    res.json({
+    res.status(200).json({
       status: "Success",
       statusCode: 200,
       message: "Successfull deleted",

@@ -59,8 +59,9 @@ exports.getAllUsers = async (req, res) => {
 };
 
 exports.updateUser = (req, res) => {
+  const user = req.query.id;
     User.findByIdAndUpdate(
-        { _id: req.profile._id },
+        { _id: user },
         { $set: req.body },
         { new: true, useFindAndModify: false },
         (err, user) => {
@@ -68,7 +69,7 @@ exports.updateUser = (req, res) => {
             return res.status(400).json({
               status: "Error",
               statusCode: 400,
-              message: "You are not authorized to update this user",
+              message: "failed to update this user",
             });
           }
           user.salt = undefined;
@@ -83,7 +84,8 @@ exports.updateUser = (req, res) => {
       );
 };
 exports.deleteUser = async (req, res) => {
-  const user = req.profile._id;
+ // const user = req.profile._id;
+ const user = req.query.id;
   await User.findById(user).remove((err, deletedUser) => {
     if (err) {
       return res.status(400).json({
