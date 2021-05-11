@@ -32,7 +32,7 @@ router.post(
       min: 5,
     }),
   ],
- // isSignedIn,
+  isSignedIn,
   signup
 );
 

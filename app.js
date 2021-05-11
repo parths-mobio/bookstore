@@ -9,6 +9,7 @@ const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
 const catRoutes = require("./routes/category");
 const proRoues = require("./routes/product");
+const roleRoutes = require("./routes/userRole");
 dotenv.config();
 const app = express();
 
@@ -35,6 +36,7 @@ app.use("/api", authRoutes);
 app.use("/api", userRoutes);
 app.use("/api", catRoutes);
 app.use("/api",proRoues);
+app.use("/api",roleRoutes);
 
 const port = process.env.PORT || 8000;
 app.use(cors());
